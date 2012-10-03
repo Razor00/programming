@@ -26,16 +26,10 @@ flen=len(f)
 
 i=0
 while i < flen:
-    if isupper(f[i]) and isupper(f[i+1]) and isupper(f[i+2]):
-        if islower(f[i+3]):
-            if isupper(f[i+4]) and isupper(f[i+5]) and isupper(f[i+6]):
-                print f[i],f[i+1],f[i+2],f[i+3],f[i+4],f[i+5],f[i+6]
-                print i
-                break
-    i=i+1
-
-for j in range(7):
-    v=ord(f[i+j])+2
-    print chr(v)
-
+	if islower(f[i]) and islower(f[i+8]) and islower(f[i+4]):
+		if isupper(f[i+1]) and isupper(f[i+2]) and isupper(f[i+3]):
+			if isupper(f[i+5]) and isupper(f[i+6]) and isupper(f[i+7]):
+				print f[i+1],f[i+2],f[i+3],f[i+4],f[i+5],f[i+6],f[i+7]
+				print i
+	i=i+1
 
