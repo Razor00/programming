@@ -7,25 +7,17 @@ threading.stack_size(67108864)
 depth = 0
 def dfs(Grev, visited, v, order1, order2):
     global number
-#    global depth
     visited[v] = True
     for e in Grev[v]:
         if not visited[e]:
-#            depth += 1
-#            if depth % 1000 == 0:
-#                print "recursion depth\n", depth
-#                print "Lenth of visited nodes : ", len(visited)
             dfs(Grev, visited, e, order1, order2);
-#            depth -= 1
     number = number + 1
     order1[v] = number 
     order2[number] = v
-    #print v, number
     return 0
 
 def dfs1(G, visited, v, order1, order2, n):
     visited[v] = True
-    #print v, order2[v]
     for e in G[order2[v]]:
         if not visited[order1[e]]:
             n = dfs1(G, visited, order1[e], order1, order2, n)  + 1;
@@ -67,11 +59,6 @@ i = 1
 for v in range(len(G)-1, 0, -1):
     if not visited[v]:
         dfs(Grev, visited, v, order1, order2) 
-#       print "processed vertex", v
-
-#print "Order1:",  order1, len(order1)
-#print  "Order2:", order2
-
 
 #===============Stage 2================
 for i in range(max_v+1):
