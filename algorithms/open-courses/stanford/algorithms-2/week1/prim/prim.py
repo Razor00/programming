@@ -8,20 +8,28 @@ def compare(x, y):
 
 def prim(edges, nodes, max_edge):
     X = [1]
+    min_edges=[]
     cost = 0
     while len(X) < nodes:
         for i, e in enumerate(edges):
             if e[1] in X and e[2] not in X:
                 cost += e[0]
                 X.append(e[2])
+                min_edges.append(e)
+                print edges[i]
+
                 del edges[i]
                 break
             if e[2] in X and e[1] not in X:
                 cost += e[0]
                 X.append(e[1])
+                print edges[i]
+                min_edges.append(e)
                 del edges[i]
                 break
-    print cost 
+    print X
+    print min_edges
+    print cost
 
 
 f = open(sys.argv[1], 'r')
