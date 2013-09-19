@@ -24,8 +24,7 @@ def dfs1(G, visited, v, order1, order2, n):
     return n
 
 f = open(sys.argv[1], 'r')
-max_v = int(f.readline().rstrip('\n\r'));
-N = int(f.readline().rstrip('\n\r'));
+max_v, N = map(int, f.readline().rstrip('\n\r').split());
 print N
 
 G={}
@@ -74,5 +73,5 @@ print leader
 
 
 import operator
-print sorted(leader.iteritems(), key=operator.itemgetter(1), reverse=True)[:5]
+#print sorted(leader.iteritems(), key=operator.itemgetter(1), reverse=True)[:5]
 
