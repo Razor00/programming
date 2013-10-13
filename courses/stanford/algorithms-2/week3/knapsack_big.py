@@ -12,16 +12,16 @@ def compare(a, b):
     return b[1] - a[1]
 
 
-"If weights are sorted in reverse order, when we approach 
+'''If weights are sorted in reverse order, when we approach 
 a weight which is greater then remaining size, then no need 
-to descend further"
+to descend further'''
 
 def knapsack_rec1(sack, size, n, h):
 
     if (n, size) in h:
         return h[(n, size)]
 
-    if n == 0:
+    if n <= 0 or size <= 0:
         return 0
 
     if sack[n][1] > size: #works only when weights are sorted in reverse
@@ -36,7 +36,7 @@ def knapsack_rec2(sack, size, n, h):
     if (n, size) in h:
         return h[(n, size)]
 
-    if n == 0:
+    if n <= 0 or size <= 0:
         return 0
 
     if sack[n][1] > size:
