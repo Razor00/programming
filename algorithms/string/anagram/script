@@ -1,1 +1,0 @@
-cat dict |tr -t '[A-Z]' '[a-z]'|sort|uniq|perl -ne 'chomp(@a=split//);@b=sort @a;print "@b\t@a\n";'|tr -d ' '|sort  > /tmp/data1
