@@ -1,6 +1,0 @@
-Based on the configuration information and how the USB device will be
-used, the host assigns a configuration value to the device. The device is now
-in the Configured state and all of the endpoints in this configuration have
-taken on their described characteristics. The USB device may now draw the
-amount of VBUS power described in its descriptor for the selected configura-
-tion. From the device’s point of view, it is now ready for use.
