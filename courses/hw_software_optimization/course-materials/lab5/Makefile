@@ -4,7 +4,7 @@
 FILES = mm.c
 
 CC = gcc
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -g3 -pg#-DDBG=1
 
 OBJS = mdriver.o mm.o memlib.o fsecs.o fcyc.o clock.o ftimer.o
 

@@ -38,8 +38,20 @@ mystery3:
    Returns the size (in B) of each block in the cache.
 */
 int get_block_size(void) {
-  /* YOUR CODE GOES HERE */
 
+  /* YOUR CODE GOES HERE */
+    flush_cache();
+    int step = 0;
+    int prev = 0;
+    int i;
+    for (i = 0; i < ((1<<30)-1); i++) {
+        if (!access_cache(i)) {
+            if (step == 1)
+                return i - prev;
+            prev = i;
+            step++;
+        }
+    }
   return -1;
 }
 
@@ -48,19 +60,80 @@ int get_block_size(void) {
 */
 int get_cache_size(int size) {
   /* YOUR CODE GOES HERE */
-
-  return -1;
+    int b, k;
+    int cache_size = 0;
+    
+    flush_cache();
+    access_cache(0);
+    for (b = 0; b < ((1<<30)-1); b += size) {
+        access_cache(b);
+        /* Due to set associativity, replacement 
+         * block can be any in the set so check 
+         * for all previous blocks for a miss
+         */
+        for (k = 0; k < b; k += size) {
+            if (!access_cache(k))
+                return cache_size;
+        }
+        cache_size += size;
+    }
+    return -1;
 }
 
 /*
    Returns the associativity of the cache.
 */
-int get_cache_assoc(int size) {
+int get1_cache_assoc(int size) {
   /* YOUR CODE GOES HERE */
+    int w;
+    int i;
+    int b = get_block_size();
+    int ass_size = 0;
+#if 1
+    for (w = 1; w < ((1<<30)-1); w++) {
+        flush_cache();
+        int end = w * b;
+        for (i = 0; i < end; i += b) {
+            access_cache(i);
+        }
+        printf("%d\n", size + (w-1) * b);
+        access_cache(size + (w-1) * b);
+        if (access_cache(0))
+            ass_size++;
+        else
+            return w;//ass_size;
 
-  return -1;
+    }
+#endif
+
+  return  -1;
 }
 
+int get_cache_assoc(int size) {
+
+    int b = get_block_size();
+    int nway;
+    int i;
+    int nsets;
+    int max_blocks = size/b;
+    for (nway = 1; nway < ((1<<30)-1); nway = 2*nway) {
+        flush_cache();
+        nsets = max_blocks/nway;
+//        printf("Checkinf for %d way cache \n", nway);
+//        printf("nway:%d, max_blocks:%d, nsets: %d\n", nway, max_blocks, nsets);
+        for (i = 0; i < max_blocks; i += nsets) {
+            access_cache(i*b);
+//            printf("setting: %d\n", i);
+               
+        }
+//        printf("setting: %d\n", max_blocks);
+        access_cache(max_blocks * b);
+        if (!access_cache(0))
+            return nway;
+    }
+    return -1;
+
+}
 //// DO NOT CHANGE ANYTHING BELOW THIS POINT
 int main(void) {
   int size;
