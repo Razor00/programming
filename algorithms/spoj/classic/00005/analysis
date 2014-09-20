@@ -1,0 +1,18 @@
+strings of type:
+AbB
+
+A > B : B = A
+A < B : incr b, if b = 9, it will effect A, after changing A, B = A
+A is reverse of B, incr b, if b = 9, it will effect A, after changing A, B = A
+
+
+Ab1b2B
+
+b1 < b2:
+    incr b1:
+    b2 = b1, may change A, B = A
+
+b1 == b2
+ same as single bit case
+just make b2 = b1 at the end
+
